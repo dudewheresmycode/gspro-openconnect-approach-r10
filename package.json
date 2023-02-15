@@ -1,0 +1,21 @@
+{
+  "name": "GSPro Approach R10 Bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "server": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.0.0"
+  },
+  "dependencies": {
+    "address": "^1.2.2",
+    "lowdb": "^1.0.0"
+  }
+}

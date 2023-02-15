@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>GSPro Approach R10 Connect</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    
+    <div class="status-bar">
+      <div class="status-container status-connecting">
+        <div class="status-icon">
+          <img src="./gspro.png" height="32" />
+        </div>
+        <div class="status-label">
+          GSPro Open API
+        </div>
+        <div class="status-value">
+          Connecting...
+        </div>
+        <div class="status-help">
+          <ol>
+            <li>Open GSPro</li>
+            <li>Select Open API Connect</li>
+          </ol>
+        </div>
+      </div>
+      <div class="status-container status-connected">
+        <div class="status-icon">
+          <img src="./garmin.png" height="32" />
+        </div>
+        <div class="status-label">
+          Approach R10
+        </div>
+        <div class="status-value">
+          Connected
+        </div>
+        <div class="status-help">
+          <ol>
+            <li>Open Garmin Golf App</li>
+            <li>Select E6 Connect &gt; Play on PC</li>
+            <li>Enter host: <code id="local-ip">x.x.x.x</code></li>
+            <li>Enter port: <code>2483</code></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <form>
+      <div id="test-shot">
+        <div class="form-field shot-field">
+          <label>Ball Speed (mph)</label>
+          <input type="number" value="98" />
+        </div>
+        <div class="form-field shot-field">
+          <label>Total Spin (rpm)</label>
+          <input type="number" min="1000" max="12000" value="2200" />
+        </div>
+        <div class="form-field shot-field">
+          <label>Spin Axis (deg)</label>
+          <input type="number" min="-45" max="45" value="-5" />
+        </div>
+        <div class="form-field shot-field">
+          <label title="Horizontal Launch Angle">HLA (deg)</label>
+          <input type="number" min="-45" max="45" value="0" />
+        </div>
+        <div class="form-field shot-field">
+          <label title="Vertical Launch Angle">VLA (deg)</label>
+          <input type="number" min="0" max="45" value="14" />
+        </div>
+      </div>
+      <div class="shot-button">
+        <button id="send-shot">Send Shot</button>
+      </div>
+    </form>
+
+    <div id="settings-modal">
+      <div class="settings-modal-dialog">
+        <h3 class="settings-header">Settings</h3>
+        <div>
+          <div class="form-field settings-field">
+            <label title="The">Units</label>
+            <select id="units">
+              <option value="Yards">Yards</option>
+              <option value="Meters">Meters</option>
+            </select>
+          </div>
+          <h4 class="settings-sub-header">GSPro Connection</h4>
+          <div class="form-field settings-field">
+            <label title="The">GSPro Host</label>
+            <input id="gspro.host" type="text" placeholder="127.0.0.1" />
+          </div>
+          <div class="form-field settings-field">
+            <label title="The">GSPro Port</label>
+            <input id="gspro.port" type="number" placeholder="921" />
+          </div>
+
+          <h4 class="settings-sub-header">Garmin Connection</h4>
+          <div class="form-field settings-field">
+            <label title="The">Device ID</label>
+            <input id="garmin.device_id" type="text" placeholder="Garmin R10" />
+          </div>
+          <div class="form-field settings-field">
+            <label title="The">Garmin Port</label>
+            <input id="garmin.port" type="number" placeholder="2483" />
+          </div>
+        </div>
+        <div class="button-bar">
+          <button class="secondary" id="settings-cancel">Cancel</button>
+          <button id="settings-save">Save</button>
+        </div>
+      </div>
+    </div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

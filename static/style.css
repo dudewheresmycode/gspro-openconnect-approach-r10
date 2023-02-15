@@ -1,0 +1,114 @@
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  background-color: #222;
+  color: #fff;
+}
+
+.status-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.status-container {
+  background-color: #333;
+  padding: 1rem;
+  flex-grow: 1;
+  width: 50%;
+  margin: 1rem;
+}
+.status-container.status-connecting {
+}
+.status-container.status-connected {
+  background-color: #77c970;
+  color: #2a3c28;
+}
+.status-container.status-connected .status-help {
+  display: none;
+}
+.status-container .status-label {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.status-container .status-value {
+  font-weight: bold;
+}
+.status-container .status-help {
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+#test-shot {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+}
+.form-field {
+  box-sizing: border-box;
+  display: grid;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0;
+}
+
+.form-field label {
+  flex-grow: 1;
+  padding: 5px 0;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.shot-button {
+  width: 100%;
+  padding: 1rem 0 0 1rem;
+}
+
+#settings-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.settings-modal-dialog {
+  background-color: #333;
+  max-width: 640px;
+  padding: 20px;
+  margin: 20px auto;
+}
+
+input[type='text'],
+input[type='number'] {
+  flex-grow: 1;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #101010;
+  padding: 0.75rem;
+  border: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+}
+button {
+  padding: 0.5rem 1rem;
+  background-color: #6290C3;
+  border: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+}
+button:hover {
+  background-color: #89ABD2;
+}
+button:active {
+  background-color: #3E6DA3;
+}
+button.secondary {
+  background-color: #555;
+}
+.button-bar {
+  margin-top: 2rem;
+}
