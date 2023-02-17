@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "address": "^1.2.2",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "sound-play": "^1.1.0"
   }
 }
