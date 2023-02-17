@@ -13,23 +13,25 @@
     />
     <title>GSPro Approach R10 Connect</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="./font/style.css">
+    <link rel="stylesheet" type="text/css" href="./font/style.css" />
   </head>
   <body>
-    <div>
-      <span class="icon-cog"></span>
+    <div class="toolbar">
+      <button id="settings-button">
+        <span class="icon-cog"></span> Settings
+      </button>
+      <button id="test-shot-button">
+        <span class="icon-power"></span> Test Shot
+      </button>
     </div>
+
     <div class="status-bar">
       <div class="status-container status-connecting">
         <div class="status-icon">
           <img src="./gspro.png" height="32" />
         </div>
-        <div class="status-label">
-          GSPro Open API
-        </div>
-        <div class="status-value">
-          Connecting...
-        </div>
+        <div class="status-label">GSPro Open API</div>
+        <div class="status-value">Connecting...</div>
         <div class="status-help">
           <ol>
             <li>Open GSPro</li>
@@ -41,12 +43,8 @@
         <div class="status-icon">
           <img src="./garmin.png" height="32" />
         </div>
-        <div class="status-label">
-          Approach R10
-        </div>
-        <div class="status-value">
-          Connected
-        </div>
+        <div class="status-label">Approach R10</div>
+        <div class="status-value">Connected</div>
         <div class="status-help">
           <ol>
             <li>Open Garmin Golf App</li>
@@ -57,37 +55,48 @@
         </div>
       </div>
     </div>
-    <form>
-      <div id="test-shot">
-        <div class="form-field shot-field">
-          <label>Ball Speed (mph)</label>
-          <input type="number" value="98" />
-        </div>
-        <div class="form-field shot-field">
-          <label>Total Spin (rpm)</label>
-          <input type="number" min="1000" max="12000" value="2200" />
-        </div>
-        <div class="form-field shot-field">
-          <label>Spin Axis (deg)</label>
-          <input type="number" min="-45" max="45" value="-5" />
-        </div>
-        <div class="form-field shot-field">
-          <label title="Horizontal Launch Angle">HLA (deg)</label>
-          <input type="number" min="-45" max="45" value="0" />
-        </div>
-        <div class="form-field shot-field">
-          <label title="Vertical Launch Angle">VLA (deg)</label>
-          <input type="number" min="0" max="45" value="14" />
-        </div>
+    <div class="debug-log">
+      <div id="debug-log-content"></div>
+    </div>
+    <!-- test shot modal -->
+    <div id="test-shot-modal" class="modal">
+      <div class="modal-dialog">
+        <h3 class="modal-header">Settings</h3>
+        <form>
+          <div id="test-shot">
+            <div class="form-field shot-field">
+              <label>Ball Speed (mph)</label>
+              <input type="number" value="98" />
+            </div>
+            <div class="form-field shot-field">
+              <label>Total Spin (rpm)</label>
+              <input type="number" min="1000" max="12000" value="2200" />
+            </div>
+            <div class="form-field shot-field">
+              <label>Spin Axis (deg)</label>
+              <input type="number" min="-45" max="45" value="-5" />
+            </div>
+            <div class="form-field shot-field">
+              <label title="Horizontal Launch Angle">HLA (deg)</label>
+              <input type="number" min="-45" max="45" value="0" />
+            </div>
+            <div class="form-field shot-field">
+              <label title="Vertical Launch Angle">VLA (deg)</label>
+              <input type="number" min="0" max="45" value="14" />
+            </div>
+          </div>
+          <div class="shot-button">
+            <button class="secondary" id="test-shot-cancel">Cancel</button>
+            <button id="send-shot">Send Shot</button>
+          </div>
+        </form>
       </div>
-      <div class="shot-button">
-        <button id="send-shot">Send Shot</button>
-      </div>
-    </form>
+    </div>
 
-    <div id="settings-modal">
-      <div class="settings-modal-dialog">
-        <h3 class="settings-header">Settings</h3>
+    <!-- settings modal -->
+    <div id="settings-modal" class="modal">
+      <div class="modal-dialog">
+        <h3 class="modal-header">Settings</h3>
         <div>
           <div class="form-field settings-field">
             <label title="The">Units</label>

@@ -2,17 +2,31 @@
   "name": "gspro-openconnect-approach-r10",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "server": "node server.js"
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder --mac --windows",
+    "release": "electron-builder --mac --windows --publish always"
+  },
+  "build": {
+    "appId": "com.dudewheresmycode.gspro-openconnect-approach-r10",
+    "productName": "GSPro OpenConnect Approach R10",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "dmg": {
+      "icon": false
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^23.0.0"
+    "electron": "^23.0.0",
+    "electron-builder": "^23.6.0",
+    "prettier": "^2.8.4"
   },
   "dependencies": {
     "address": "^1.2.2",

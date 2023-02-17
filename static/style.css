@@ -1,5 +1,6 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 14px;
   background-color: #222;
   color: #fff;
@@ -7,6 +8,13 @@ body {
 }
 body.status-page {
   background-color: transparent;
+}
+.toolbar {
+  background-color: #101010;
+  padding: 1rem;
+}
+.toolbar button {
+  margin-right: 0.5rem;
 }
 .status-bar {
   display: flex;
@@ -18,7 +26,7 @@ body.status-page {
   padding: 1rem;
   flex-grow: 1;
   width: 50%;
-  margin: 1rem;
+  /* margin: 1rem; */
 }
 .status-container.status-connecting {
 }
@@ -41,6 +49,15 @@ body.status-page {
   font-size: 12px;
   margin-top: 0.5rem;
 }
+
+.debug-log {
+  height: 300px;
+  background-color: #101010;
+}
+.debug-log-content {
+  font-family: monospace;
+}
+
 #test-shot {
   display: flex;
   flex-direction: row;
@@ -66,20 +83,26 @@ body.status-page {
   padding: 1rem 0 0 1rem;
 }
 
-#settings-modal {
+.modal {
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 70ms linear;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
-.settings-modal-dialog {
+.modal-dialog {
   background-color: #333;
   max-width: 640px;
   padding: 20px;
   margin: 20px auto;
+}
+.modal-header {
+  margin: 0;
 }
 
 input[type='text'],
@@ -92,23 +115,25 @@ input[type='number'] {
   background-color: #101010;
   padding: 0.75rem;
   border: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 14px;
 }
 button {
   padding: 0.5rem 1rem;
-  background-color: #6290C3;
+  background-color: #6290c3;
   border: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-weight: bold;
   cursor: pointer;
   color: #fff;
 }
 button:hover {
-  background-color: #89ABD2;
+  background-color: #89abd2;
 }
 button:active {
-  background-color: #3E6DA3;
+  background-color: #3e6da3;
 }
 button.secondary {
   background-color: #555;
