@@ -1,14 +1,14 @@
 {
   "name": "gspro-openconnect-approach-r10",
   "version": "1.0.0",
-  "description": "",
+  "description": "GSPro OpenConnect for Garmin Approach R10",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --mac --windows",
-    "release": "electron-builder --mac --windows --publish always"
+    "build": "electron-builder --windows",
+    "release": "electron-builder --windows --publish always"
   },
   "build": {
     "appId": "com.dudewheresmycode.gspro-openconnect-approach-r10",
