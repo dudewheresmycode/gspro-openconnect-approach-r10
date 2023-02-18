@@ -16,121 +16,130 @@
     <link rel="stylesheet" type="text/css" href="./font/style.css" />
   </head>
   <body>
-    <div class="toolbar">
-      <button id="settings-button">
-        <span class="icon-cog"></span> Settings
-      </button>
-      <button id="test-shot-button">
-        <span class="icon-power"></span> Test Shot
-      </button>
-    </div>
+    <div id="root">
+      <div class="toolbar">
+        <button id="settings-button">
+          <span class="icon-cog"></span> Settings
+        </button>
+        <button id="test-shot-button">
+          <span class="icon-power"></span> Test Shot
+        </button>
+      </div>
 
-    <div class="status-bar">
-      <div class="status-container status-connecting">
-        <div class="status-icon">
-          <img src="./gspro.png" height="32" />
-        </div>
-        <div class="status-label">GSPro Open API</div>
-        <div class="status-value">Connecting...</div>
-        <div class="status-help">
-          <ol>
-            <li>Open GSPro</li>
-            <li>Select Open API Connect</li>
-          </ol>
-        </div>
-      </div>
-      <div class="status-container status-connected">
-        <div class="status-icon">
-          <img src="./garmin.png" height="32" />
-        </div>
-        <div class="status-label">Approach R10</div>
-        <div class="status-value">Connected</div>
-        <div class="status-help">
-          <ol>
-            <li>Open Garmin Golf App</li>
-            <li>Select E6 Connect &gt; Play on PC</li>
-            <li>Enter host: <code id="local-ip">x.x.x.x</code></li>
-            <li>Enter port: <code>2483</code></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <div class="debug-log">
-      <div id="debug-log-content"></div>
-    </div>
-    <!-- test shot modal -->
-    <div id="test-shot-modal" class="modal">
-      <div class="modal-dialog">
-        <h3 class="modal-header">Settings</h3>
-        <form>
-          <div id="test-shot">
-            <div class="form-field shot-field">
-              <label>Ball Speed (mph)</label>
-              <input type="number" value="98" />
-            </div>
-            <div class="form-field shot-field">
-              <label>Total Spin (rpm)</label>
-              <input type="number" min="1000" max="12000" value="2200" />
-            </div>
-            <div class="form-field shot-field">
-              <label>Spin Axis (deg)</label>
-              <input type="number" min="-45" max="45" value="-5" />
-            </div>
-            <div class="form-field shot-field">
-              <label title="Horizontal Launch Angle">HLA (deg)</label>
-              <input type="number" min="-45" max="45" value="0" />
-            </div>
-            <div class="form-field shot-field">
-              <label title="Vertical Launch Angle">VLA (deg)</label>
-              <input type="number" min="0" max="45" value="14" />
+      <div class="status-bar">
+        <div id="status-gspro" class="status-container">
+          <div class="status-icon">
+            <img src="./images/gspro.png" />
+          </div>
+          <div class="status-content">
+            <div class="status-label">GSPro Connect OpenAPI</div>
+            <div class="status-value">
+              <span class="icon-spinner3 spin"></span> Initializing...
             </div>
           </div>
-          <div class="shot-button">
-            <button class="secondary" id="test-shot-cancel">Cancel</button>
-            <button id="send-shot">Send Shot</button>
+        </div>
+        <div id="status-garmin" class="status-container">
+          <div class="status-icon">
+            <img src="./images/garmin.png" />
           </div>
-        </form>
+          <div class="status-content">
+            <div class="status-label">Approach R10</div>
+            <div class="status-value">
+              <span class="icon-spinner3 icon-spin"></span> Initializing...
+            </div>
+            <div class="status-help">
+              <div class="connection-info">
+                <label>Host</label>
+                <code id="local-ip">x.x.x.x</code>
+              </div>
+              <div class="connection-info">
+                <label>Port</label>
+                <code>2483</code>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- settings modal -->
-    <div id="settings-modal" class="modal">
-      <div class="modal-dialog">
-        <h3 class="modal-header">Settings</h3>
-        <div>
-          <div class="form-field settings-field">
-            <label title="The">Units</label>
-            <select id="units">
-              <option value="Yards">Yards</option>
-              <option value="Meters">Meters</option>
-            </select>
-          </div>
-          <h4 class="settings-sub-header">GSPro Connection</h4>
-          <div class="form-field settings-field">
-            <label title="The">GSPro Host</label>
-            <input id="gspro.host" type="text" placeholder="127.0.0.1" />
-          </div>
-          <div class="form-field settings-field">
-            <label title="The">GSPro Port</label>
-            <input id="gspro.port" type="number" placeholder="921" />
-          </div>
-
-          <h4 class="settings-sub-header">Garmin Connection</h4>
-          <div class="form-field settings-field">
-            <label title="The">Device ID</label>
-            <input id="garmin.device_id" type="text" placeholder="Garmin R10" />
-          </div>
-          <div class="form-field settings-field">
-            <label title="The">Garmin Port</label>
-            <input id="garmin.port" type="number" placeholder="2483" />
-          </div>
+      <!-- test shot modal -->
+      <div id="test-shot-modal" class="modal">
+        <div class="modal-dialog">
+          <h3 class="modal-header">Settings</h3>
+          <form id="test-shot-form">
+            <div id="test-shot">
+              <div class="form-field shot-field">
+                <label>Ball Speed (mph)</label>
+                <input name="ballSpeed" type="number" />
+              </div>
+              <div class="form-field shot-field">
+                <label>Total Spin (rpm)</label>
+                <input name="totalSpin" type="number" min="1000" max="12000" />
+              </div>
+              <div class="form-field shot-field">
+                <label>Spin Axis (deg)</label>
+                <input name="spinAxis" type="number" min="-45" max="45" />
+              </div>
+              <div class="form-field shot-field">
+                <label title="Horizontal Launch Angle">HLA (deg)</label>
+                <input name="hla" type="number" min="-45" max="45" />
+              </div>
+              <div class="form-field shot-field">
+                <label title="Vertical Launch Angle">VLA (deg)</label>
+                <input name="vla" type="number" min="0" max="45" />
+              </div>
+            </div>
+            <div class="shot-button">
+              <button class="secondary" id="test-shot-cancel">Cancel</button>
+              <button type="submit" id="send-shot">Send Shot</button>
+            </div>
+          </form>
         </div>
-        <div class="button-bar">
-          <button class="secondary" id="settings-cancel">Cancel</button>
-          <button id="settings-save">Save</button>
+      </div>
+
+      <!-- settings modal -->
+      <div id="settings-modal" class="modal">
+        <div class="modal-dialog">
+          <h3 class="modal-header">Settings</h3>
+          <div>
+            <div class="form-field settings-field">
+              <label title="The">Units</label>
+              <select id="units">
+                <option value="Yards">Yards</option>
+                <option value="Meters">Meters</option>
+              </select>
+            </div>
+            <h4 class="settings-sub-header">GSPro Connection</h4>
+            <div class="form-field settings-field">
+              <label title="The">GSPro Host</label>
+              <input id="gspro.host" type="text" placeholder="127.0.0.1" />
+            </div>
+            <div class="form-field settings-field">
+              <label title="The">GSPro Port</label>
+              <input id="gspro.port" type="number" placeholder="921" />
+            </div>
+
+            <h4 class="settings-sub-header">Garmin Connection</h4>
+            <div class="form-field settings-field">
+              <label title="The">Device ID</label>
+              <input
+                id="garmin.device_id"
+                type="text"
+                placeholder="Garmin R10"
+              />
+            </div>
+            <div class="form-field settings-field">
+              <label title="The">Garmin Port</label>
+              <input id="garmin.port" type="number" placeholder="2483" />
+            </div>
+          </div>
+          <div class="button-bar">
+            <button class="secondary" id="settings-cancel">Cancel</button>
+            <button id="settings-save">Save</button>
+          </div>
         </div>
       </div>
     </div>
-    <script src="./renderer.js"></script>
+    <script src="./js/renderer.js"></script>
   </body>
 </html>

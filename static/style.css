@@ -1,3 +1,7 @@
+html,
+body {
+  height: 100%;
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -9,8 +13,12 @@ body {
 body.status-page {
   background-color: transparent;
 }
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .toolbar {
-  background-color: #101010;
   padding: 1rem;
 }
 .toolbar button {
@@ -18,25 +26,58 @@ body.status-page {
 }
 .status-bar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .status-container {
   background-color: #333;
   padding: 1rem;
   flex-grow: 1;
-  width: 50%;
+  display: flex;
+  flex-direction: row;
+  border-left: 20px solid #333;
+  height: 100%;
+  align-items: center;
+  font-size: calc(0.5em + 1vw);
 }
-/* .status-container.status-connecting {} */
+.status-container:first-child {
+  border-bottom: 1px solid #444;
+}
+.status-container.status-connecting {
+  border-left-color: #888;
+  color: #aaa;
+}
+.status-container.status-disconnected {
+  border-left-color: #b54632;
+}
 .status-container.status-connected {
-  background-color: #77c970;
-  color: #2a3c28;
+  border-left-color: #77c970;
+}
+.status-container.status-disconnected .status-value {
+  color: #b54632;
+}
+.status-container.status-connected .status-value {
+  color: #77c970;
 }
 .status-container.status-connected .status-help {
   display: none;
 }
+
+.status-container .status-icon {
+  width: 20vh;
+  max-width: 150px;
+  margin-right: 2rem;
+  padding: 1rem;
+}
+.status-container .status-content {
+}
+.status-container .status-icon img {
+  width: 100%;
+}
 .status-container .status-label {
-  font-size: 1.5rem;
+  font-size: calc(0.8em + 1vw);
+  /* font-size: 1.5vw; */
   margin-bottom: 0.5rem;
 }
 .status-container .status-value {
@@ -144,4 +185,23 @@ button.secondary {
   background-color: #77c970;
   width: 290px;
   height: 50px;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  position: relative;
+  top: 1px;
+}
+
+.spin {
+  display: inline-block;
+  animation: spinner 2s infinite linear;
+}
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
