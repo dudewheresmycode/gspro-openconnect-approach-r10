@@ -12,7 +12,7 @@
   },
   "build": {
     "appId": "com.dudewheresmycode.gspro-openconnect-approach-r10",
-    "productName": "GSPro OpenConnect Approach R10",
+    "productName": "GSPro Connect R10",
     "mac": {
       "category": "public.app-category.utilities"
     },
