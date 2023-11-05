@@ -5,6 +5,10 @@ function mainWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    minHeight: 360,
+    minWidth: 640,
+    // titleBarStyle: 'hidden',
+    // titleBarOverlay: true,
     webPreferences: {
       preload: PRELOAD,
     },

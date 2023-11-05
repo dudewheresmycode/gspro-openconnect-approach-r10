@@ -6,15 +6,18 @@ const { getConfig } = require('./config');
 const mainWindow = require('./elements/mainWindow');
 const statusOverlay = require('./elements/statusOverlay');
 const trayMenu = require('./elements/trayMenu');
+const appMenu = require('./elements/appMenu');
 const ipcListeners = require('./services/ipc');
 
 let tray = null;
 let mainWin = null;
+let menu = null;
 let status = null;
 
 app.whenReady().then(() => {
   mainWin = mainWindow();
-  tray = trayMenu();
+  menu = appMenu();
+  // tray = trayMenu();
   // status = statusOverlay();
 
   // const { port1, port2 } = new MessageChannelMain();
