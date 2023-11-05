@@ -1,5 +1,6 @@
 const { BrowserWindow } = require('electron');
 const { PRELOAD, INDEX_PAGE } = require('../constants');
+const url = require('url');
 
 function mainWindow() {
   const win = new BrowserWindow({
@@ -13,7 +14,15 @@ function mainWindow() {
       preload: PRELOAD,
     },
   });
-  win.loadFile(INDEX_PAGE);
+  // win.loadFile(INDEX_PAGE);
+  win.loadURL(
+    url.format({
+      pathname: INDEX_PAGE, // relative path to the HTML-file
+      protocol: 'file:',
+      slashes: true,
+    })
+  );
+
   win.webContents.openDevTools();
 
   return win;

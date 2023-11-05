@@ -3,4 +3,4 @@ node_modules
 app-icon
 .DS*
 dist
-build
+webpack

@@ -9,7 +9,7 @@ module.exports = ({ mode } = { mode: 'production' }) => {
     mode,
     output: {
       publicPath: './',
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, 'webpack'),
       filename: 'bundled.js',
     },
     devServer: {

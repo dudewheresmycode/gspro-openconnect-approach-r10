@@ -8,9 +8,10 @@
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server",
     "watch": "webpack watch --env mode=development",
-    "dev": "npm run webpack-dev-server -- --env mode=development",
-    "prod": "npm run webpack -- --env mode=production",
-    "build": "electron-builder --windows",
+    "debug": "npm run webpack-dev-server -- --env mode=development",
+    "build": "webpack --env mode=production",
+    "build-win": "electron-builder --windows",
+    "build-mac": "electron-builder --mac",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start": "electron .",
@@ -21,10 +22,28 @@
     "appId": "com.dudewheresmycode.gspro-openconnect-approach-r10",
     "productName": "GSPro Connect R10",
     "mac": {
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities",
+      "icon": "./assets/icon/icon.icns"
     },
+    "extends": null,
+    "files": [
+      "**/*",
+      "!**/*.ts",
+      "!*.map",
+      "!package.json",
+      "!package-lock.json",
+      {
+        "from": "../webpack",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "dmg": {
       "icon": false
+    },
+    "win": {
+      "icon": "./assets/icon/icon.png"
     }
   },
   "keywords": [],
