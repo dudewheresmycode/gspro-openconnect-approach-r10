@@ -141,7 +141,14 @@ class GSProConnect {
     if (newStatus) {
       this.status = newStatus;
     }
-    this.ipcPort.send('gspro-status', this.status);
+    try {
+      if (this.ipcPort.isDestroyed()) {
+        return;
+      }
+      this.ipcPort.send('gspro-status', this.status);
+    } catch (error) {
+      console.log('error sending status', error);
+    }
     this.log('update client');
   }
 
