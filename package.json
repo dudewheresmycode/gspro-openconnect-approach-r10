@@ -1,6 +1,6 @@
 {
   "name": "gspro-openconnect-approach-r10",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "GSPro OpenConnect for Garmin Approach R10",
   "main": "electron/main.js",
   "scripts": {
