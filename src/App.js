@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
@@ -17,11 +17,16 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  CardHeader,
   FormControl,
   FormControlLabel,
   InputLabel,
   TextField,
+  useTheme,
 } from '@mui/material';
+
+import GSProIcon from './gspro-icon.svg';
+import ApproachR10 from './approach-r10.svg';
 
 const testShotData = {
   ballSpeed: 98.5,
@@ -40,13 +45,85 @@ const clubData = {
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#3f51b5',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+    success: {
+      main: '#2CBC66',
+    },
+    error: {
+      main: '#E26D5A',
+    },
+    warning: {
+      main: '#F4D35E',
+    },
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
 });
 
+function ConnectionStatus({ isConnecting, isConnected }) {
+  const fontSize = '2.5rem';
+  const theme = useTheme();
+
+  const backgroundColor = useMemo(() => {
+    if (isConnected) {
+      return theme.palette.success.dark;
+    } else if (isConnecting) {
+      return theme.palette.info.dark;
+    }
+    return theme.palette.warning.dark;
+  }, [isConnecting, isConnected]);
+
+  const label = useMemo(() => {
+    if (isConnected) {
+      return 'Connected';
+    } else if (isConnecting) {
+      return 'Connecting...';
+    }
+    return 'Disconnected';
+  }, [isConnecting, isConnected]);
+
+  const icon = useMemo(() => {
+    if (isConnected) {
+      return <CheckIcon sx={{ fontSize }} color="success" />;
+    } else if (isConnecting) {
+      return <CircularProgress size={fontSize} />;
+    }
+    return <WarningIcon sx={{ fontSize }} color="warning" />;
+  }, [isConnecting, isConnected, fontSize]);
+
+  return (
+    <CardContent sx={{ backgroundColor, padding: 1 }}>
+      <Grid container={true} direction="row" alignItems="center" spacing={2}>
+        <Grid item={true}>{icon}</Grid>
+        <Grid item={true}>
+          <Typography>{label}</Typography>
+        </Grid>
+      </Grid>
+    </CardContent>
+  );
+}
+
 export default function App() {
-  const [logData, setLogData] = useState('');
   const [port, setPort] = useState(2483);
   const [localIp, setLocalIp] = useState();
+  const theme = useTheme();
   const [gsProState, setGsProState] = useState({
     connected: false,
     connecting: true,
@@ -62,7 +139,6 @@ export default function App() {
   const sendTestShot = useCallback((event) => {
     console.log('test shot');
     // testShotData
-    setLogData((prev) => prev + `TEST-SHOT: ${JSON.stringify(testShotData)}\n`);
     window.electronAPI.sendTestShot(testShotData, clubData);
   }, []);
 
@@ -73,13 +149,11 @@ export default function App() {
 
   const handleGarminUpdate = useCallback((_event, status) => {
     console.log('handleGarminUpdate', status);
-    setLogData((prev) => prev + `GARMIN: ${JSON.stringify(status)}\n`);
     setGarminState(status);
   }, []);
 
   const handleGSProUpdate = useCallback((_event, status) => {
     console.log('handleGSProUpdate', status);
-    setLogData((prev) => prev + `GSPRO: ${JSON.stringify(status)}\n`);
     setGsProState(status);
   }, []);
 
@@ -96,33 +170,28 @@ export default function App() {
       <Grid container={true} spacing={3} padding={3}>
         <Grid item={true} xs={6}>
           <Card sx={{ height: '100%' }}>
+            <ConnectionStatus
+              isConnected={gsProState.connected}
+              isConnecting={gsProState.connecting}
+            />
+            <CardHeader title="GSPro OpenAPI" align="center" />
+
             <CardContent align="center">
               <Grid container={true} spacing={3} direction="column">
                 <Grid item={true}>
-                  <Typography variant="h5">GSPro OpenAPI</Typography>
+                  <img src={GSProIcon} height="120" />
                 </Grid>
-                <Grid item={true}>
-                  {gsProState.connected ? (
-                    <Chip
-                      icon={<CheckIcon />}
-                      label="Connected"
-                      color="success"
-                    />
-                  ) : gsProState.connecting ? (
-                    <Chip
-                      icon={<CircularProgress size={'1rem'} />}
-                      label="Connecting"
-                      color="info"
-                    />
-                  ) : (
-                    <Chip
-                      icon={<WarningIcon />}
-                      label="Disconnected"
-                      color="warning"
-                    />
-                  )}
-                </Grid>
-                <Grid item={true}>
+                {/* <Grid item={true} flexGrow={0} flexShrink={1} xs={3}>
+                  <img src={GSProIcon} width="60" />
+                </Grid> */}
+                {/* <Grid item={true} xs={true}>
+                  <ConnectionStatus
+                    isConnected={gsProState.connected}
+                    isConnecting={gsProState.connecting}
+                  />
+                </Grid> */}
+                <Grid item={true} xs={true} flexGrow={1} flexShrink={0}>
+                  {/* <Typography variant="h5">GSPro OpenAPI</Typography> */}
                   <Button
                     variant="contained"
                     color="inherit"
@@ -137,71 +206,54 @@ export default function App() {
           </Card>
         </Grid>
         <Grid item={true} xs={6}>
-          <Card sx={{ height: '100%' }}>
+          <Card>
+            <ConnectionStatus
+              isConnected={garminState.connected}
+              isConnecting={garminState.connecting}
+            />
             <CardContent align="center">
               <Grid container={true} spacing={3} direction="column">
                 <Grid item={true}>
                   <Typography variant="h5">Approach R10</Typography>
                 </Grid>
                 <Grid item={true}>
-                  {garminState.connected ? (
-                    <Chip
-                      icon={<CheckIcon />}
-                      label="Connected"
-                      color="success"
-                    />
-                  ) : gsProState.connecting ? (
-                    <Chip
-                      icon={<CircularProgress size={'1rem'} />}
-                      label="Connecting"
-                      color="info"
-                    />
-                  ) : (
-                    <Chip
-                      icon={<WarningIcon />}
-                      label="Disconnected"
-                      color="warning"
-                    />
-                  )}
+                  <img src={ApproachR10} height="120" />
                 </Grid>
-                <Grid item={true}>
-                  <Box align="left">
-                    <Typography sx={{ fontSize: 11 }} color="darkgrey">
-                      Host IP
-                    </Typography>
-                    <Typography sx={{ fontSize: 16 }}>
-                      <code>{localIp}</code>
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item={true}>
-                  <TextField
-                    variant="standard"
-                    label="Port"
-                    fullWidth={true}
-                    value={port}
-                    onChange={handlePortChange}
-                  />
-                </Grid>
+                {!garminState.connected ? (
+                  <Grid item={true}>
+                    <Grid container={true} direction="row">
+                      <Grid item={true} xs={6}>
+                        <Box align="left">
+                          <Typography sx={{ fontSize: 14 }} color="darkgrey">
+                            This Computer's IP
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ fontWeight: 'bold', fontSize: 24 }}
+                          >
+                            {localIp}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item={true} xs={6}>
+                        <Box align="left">
+                          <Typography sx={{ fontSize: 14 }} color="darkgrey">
+                            Port
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ fontWeight: 'bold', fontSize: 24 }}
+                          >
+                            {port}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : null}
               </Grid>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid xs={12} item={true}>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Debug Log</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography sx={{ fontSize: 12 }} component="div">
-                <pre className="debug">{logData}</pre>
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
         </Grid>
       </Grid>
     </ThemeProvider>

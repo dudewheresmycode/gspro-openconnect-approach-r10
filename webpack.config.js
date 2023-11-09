@@ -27,6 +27,17 @@ module.exports = ({ mode } = { mode: 'production' }) => {
           use: ['style-loader', 'css-loader'],
         },
         {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: 'svg-url-loader',
+              options: {
+                limit: 10000,
+              },
+            },
+          ],
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
