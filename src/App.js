@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,7 +12,30 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import CheckIcon from '@mui/icons-material/CheckCircle';
 import WarningIcon from '@mui/icons-material/Warning';
-import { TextField } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  TextField,
+} from '@mui/material';
+
+const testShotData = {
+  ballSpeed: 98.5,
+  spinAxis: -10.2,
+  totalSpin: 2350.2,
+  hla: 0.0,
+  vla: 13.5,
+};
+
+const clubData = {
+  clubAngleFace: -8.2,
+  clubAnglePath: -1.2,
+  clubHeadSpeed: 160,
+};
 
 const darkTheme = createTheme({
   palette: {
@@ -20,6 +44,7 @@ const darkTheme = createTheme({
 });
 
 export default function App() {
+  const [logData, setLogData] = useState('');
   const [port, setPort] = useState(2483);
   const [localIp, setLocalIp] = useState();
   const [gsProState, setGsProState] = useState({
@@ -36,6 +61,9 @@ export default function App() {
 
   const sendTestShot = useCallback((event) => {
     console.log('test shot');
+    // testShotData
+    setLogData((prev) => prev + `TEST-SHOT: ${JSON.stringify(testShotData)}\n`);
+    window.electronAPI.sendTestShot(testShotData, clubData);
   }, []);
 
   const handlePortChange = useCallback((event) => {
@@ -45,11 +73,13 @@ export default function App() {
 
   const handleGarminUpdate = useCallback((_event, status) => {
     console.log('handleGarminUpdate', status);
+    setLogData((prev) => prev + `GARMIN: ${JSON.stringify(status)}\n`);
     setGarminState(status);
   }, []);
 
   const handleGSProUpdate = useCallback((_event, status) => {
     console.log('handleGSProUpdate', status);
+    setLogData((prev) => prev + `GSPRO: ${JSON.stringify(status)}\n`);
     setGsProState(status);
   }, []);
 
@@ -65,7 +95,7 @@ export default function App() {
       <CssBaseline />
       <Grid container={true} spacing={3} padding={3}>
         <Grid item={true} xs={6}>
-          <Card>
+          <Card sx={{ height: '100%' }}>
             <CardContent align="center">
               <Grid container={true} spacing={3} direction="column">
                 <Grid item={true}>
@@ -107,7 +137,7 @@ export default function App() {
           </Card>
         </Grid>
         <Grid item={true} xs={6}>
-          <Card>
+          <Card sx={{ height: '100%' }}>
             <CardContent align="center">
               <Grid container={true} spacing={3} direction="column">
                 <Grid item={true}>
@@ -135,17 +165,20 @@ export default function App() {
                   )}
                 </Grid>
                 <Grid item={true}>
-                  <TextField
-                    label="Host IP"
-                    value={localIp}
-                    InputProps={{
-                      readOnly: true,
-                    }}
-                  />
+                  <Box align="left">
+                    <Typography sx={{ fontSize: 11 }} color="darkgrey">
+                      Host IP
+                    </Typography>
+                    <Typography sx={{ fontSize: 16 }}>
+                      <code>{localIp}</code>
+                    </Typography>
+                  </Box>
                 </Grid>
                 <Grid item={true}>
                   <TextField
+                    variant="standard"
                     label="Port"
+                    fullWidth={true}
                     value={port}
                     onChange={handlePortChange}
                   />
@@ -154,11 +187,22 @@ export default function App() {
             </CardContent>
           </Card>
         </Grid>
-        {/* <Grid xs={12} item={true}>
-          <Card>
-            <CardContent>Hello</CardContent>
-          </Card>
-        </Grid> */}
+        <Grid xs={12} item={true}>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Debug Log</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography sx={{ fontSize: 12 }} component="div">
+                <pre className="debug">{logData}</pre>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
       </Grid>
     </ThemeProvider>
   );

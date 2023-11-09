@@ -276,8 +276,15 @@ class GarminR10 {
     if (newStatus) {
       this.status = newStatus;
     }
-    this.ipcPort.send('garmin-status', this.status);
-    console.log('[garmin] sendIpcStatus');
+    try {
+      if (this.ipcPort.isDestroyed()) {
+        return;
+      }
+      this.ipcPort.send('garmin-status', this.status);
+      console.log('[garmin] sendIpcStatus');
+    } catch (error) {
+      console.log('error sending status', error);
+    }
   }
 }
 

@@ -23,7 +23,7 @@ function mainWindow() {
     })
   );
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   return win;
 }

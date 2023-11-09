@@ -3,3 +3,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
+pre.debug {
+  background-color: #101010;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 4px;
+}
