@@ -6,11 +6,12 @@ title: Approach R10 Connect
 
 # Approach R10 Connect
 
-Approach R10 Connect is an open-source Windows application that acts as a bridge for connecting your [Garmin Approach R10](https://www.garmin.com/en-US/p/695391) Launch Monitor with the [GSPro Golf Simulator](https://gsprogolf.com/).
+Approach R10 Connect is an open-source Windows application that acts as a bridge for connecting your [Garmin Approach R10](https://www.garmin.com/en-US/p/695391){:target="\_blank"} Launch Monitor with the [GSPro Golf Simulator](https://gsprogolf.com/){:target="\_blank"}.
 
 <a
-  style="font-size:2rem;font-weight:bold;"
-  href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases">⬇ Download for Windows</a>
+style="font-size:1.5rem;font-weight:bold;"
+href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases"
+target="\_blank"> ⬇ Download for Windows</a>
 
 ## Install and Run Approach R10 Connect
 
@@ -23,4 +24,4 @@ Once you have everything downloaded and installed, go ahead and open this app fo
 ### Setup Guides:
 
 1. [Connecting GSPro](./connect-gspro)
-1. [Connecting Approach R10](./connect-approach-r10)
+2. [Connecting Approach R10](./connect-approach-r10)
