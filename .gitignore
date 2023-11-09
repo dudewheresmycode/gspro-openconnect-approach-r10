@@ -4,3 +4,5 @@ app-icon
 .DS*
 dist
 webpack
+docs/.jekyll-cache
+docs/_site

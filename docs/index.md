@@ -1,5 +1,6 @@
 ---
 title: Approach R10 Connect
+layout: base
 ---
 
 <img src="./images/icon_1024.png" height="128" />
