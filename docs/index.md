@@ -1,6 +1,5 @@
 ---
 title: Approach R10 Connect
-layout: base
 ---
 
 <img src="./images/icon_1024.png" height="128" />
@@ -9,7 +8,7 @@ layout: base
 
 <a
 style="font-size:1.5rem;font-weight:bold;"
-href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases"
+href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases/latest"
 target="\_blank"> ⬇ Download for Windows</a>
 
 ## Install and Run Approach R10 Connect
