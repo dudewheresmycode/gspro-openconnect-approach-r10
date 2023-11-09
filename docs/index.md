@@ -1,10 +1,14 @@
-# GSPro Connect R10
+---
+title: Approach R10 Connect
+---
 
-Welcome to the GSPro Connect R10 guide! This app makes it easy to connect your Garmin Approach R10 to the GSPro Software.
+# Approach R10 Connect
+
+Approach R10 Connect is an open-source Windows application that acts as a bridge for connecting your [Garmin Approach R10](https://www.garmin.com/en-US/p/695391) Launch Monitor with the [GSPro Golf Simulator](https://gsprogolf.com/).
 
 <a href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases">Download</a>
 
-## Install and Run GSPro Connect R10
+## Install and Run Approach R10 Connect
 
 Download the `.exe` file from the releases page, and follow the instructions to install it.
 
@@ -14,8 +18,8 @@ Once you've downloaded, installed, and opened this app for the first time, there
 
 ## Connecting GSPro
 
-1. Open the GSPro app and select GSPro Connect API as your Launch Monitor source.
-2. Start the game from the GSPro Launch Menu, and the APIv1 Connect app should open as well.
+1. Open **GSPro** and select **GSPro Connect API** as your Launch Monitor source.
+2. Start the game from the GSPro Launch Menu, and the **APIv1 Connect** window should open as well.
 
 <img src="./images/GSPro.jpg" width="400" />
 
