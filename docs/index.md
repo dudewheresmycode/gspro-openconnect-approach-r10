@@ -2,47 +2,25 @@
 title: Approach R10 Connect
 ---
 
+<img src="./images/icon_1024.png" height="128" />
+
 # Approach R10 Connect
 
 Approach R10 Connect is an open-source Windows application that acts as a bridge for connecting your [Garmin Approach R10](https://www.garmin.com/en-US/p/695391) Launch Monitor with the [GSPro Golf Simulator](https://gsprogolf.com/).
 
-<a href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases">Download</a>
+<a
+  style="font-size:2rem;font-weight:bold;"
+  href="https://github.com/dudewheresmycode/gspro-openconnect-approach-r10/releases">⬇ Download for Windows</a>
 
 ## Install and Run Approach R10 Connect
 
 Download the `.exe` file from the releases page, and follow the instructions to install it.
 
-> Note: Windows may warn about this software coming from an untrusted developer. For now, you'll need to click **More Info > Run anyway**, until we've setup code signing.
+Once you have everything downloaded and installed, go ahead and open this app for the first time. You should see two items, likely both displaying **Disconnected**. Follow the guides below to get everything up and running.
 
-Once you've downloaded, installed, and opened this app for the first time, there are just a couple more steps to get everything connected.
+> WARNING: Windows may warn about this software coming from an untrusted developer. For now, you'll need to click **More Info > Run anyway**, until we've setup code signing.
 
-## Connecting GSPro
+### Setup Guides:
 
-1. Open **GSPro** and select **GSPro Connect API** as your Launch Monitor source.
-2. Start the game from the GSPro Launch Menu, and the **APIv1 Connect** window should open as well.
-
-<img src="./images/GSPro.jpg" width="400" />
-
-<img src="./images/APIv1Connect.jpg" width="400" />
-
-> Note: If GSPro opened in fullscreen, and you don't see the other windows, you can press `F11` to toggle GSPro into windowed mode. 3. If everything went ok, both the **GSPro APIv1 Connect** and **Connect R10** app should now indicate they are connected.
-
-> Note: It shouldn't matter which order you launch GSPro or the **Connect R10** app, but there's a bug with **APIv1 Connect**, where it won't reestablish a connection if the **Connect R10** application exits. If you find your self unable to send shot data, simply restart the GSPro or the **APIv1 Connect** application to reconnect.
-
-## Connect R10 to Garmin App
-
-1. Use Bluetooth to pair your Garmin Approach R10 with your smartphone or tablet running the Garmin Golf app. [More information](https://tinyurl.com/yzwh468u)
-2. Select **TruGolf E6 Connect**
-3. Click the **Settings** icon
-4. Enter the **Host** (ip address) and **Port** displayed in the **R10 Connect** app
-5. Select **Test Connection**
-6. If everything connected ok, you should now be able to select **Play on PC > Start Session**
-
-<br />
-<img src="./images/ConnectR10.jpg" width="400" />
-<br />
-<br />
-
-Huzzah! 🎉 Now your shots should be flowing to GSPro. May The Fores Be With You!
-
-<img src="https://media.giphy.com/media/l23bRTPezLRZz0ks58/giphy.gif" width="400" />
+1. [Connecting GSPro](./connect-gspro)
+1. [Connecting Approach R10](./connect-approach-r10)
