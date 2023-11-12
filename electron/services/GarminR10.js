@@ -7,6 +7,7 @@ const { getConfig } = require('../config');
 const {
   get_success_message,
   get_handshake_message,
+  get_shot_complete_message,
   get_sim_command,
 } = require('../util/simMessages');
 
@@ -109,13 +110,13 @@ class GarminR10 {
         this.handlePong();
         break;
       case 'SetClubType':
-        this.updateClubType(data.ClubType);
+        this.updateClubType(dataObj.ClubType);
         break;
       case 'SetBallData':
-        this.setBallData(data.BallData);
+        this.setBallData(dataObj.BallData);
         break;
       case 'SetClubData':
-        this.setClubData(data.ClubData);
+        this.setClubData(dataObj.ClubData);
         break;
       case 'SendShot':
         this.sendShot();
@@ -126,7 +127,7 @@ class GarminR10 {
   }
   updateClubType(clubType) {
     this.clubType = clubType;
-    this.client.write(SimMessages.get_success_message('SetClubType'));
+    this.client.write(get_success_message('SetClubType'));
   }
 
   setBallData(ballData) {
@@ -148,7 +149,7 @@ class GarminR10 {
       ready: false,
     });
 
-    this.client.write(SimMessages.get_success_message('SetBallData'));
+    this.client.write(get_success_message('SetBallData'));
   }
 
   setClubData(clubData) {
@@ -170,7 +171,7 @@ class GarminR10 {
       ready: false,
     });
 
-    this.client.write(SimMessages.get_success_message('SetClubData'));
+    this.client.write(get_success_message('SetClubData'));
   }
 
   sendTestShot(ballData, clubData = {}) {
